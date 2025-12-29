@@ -138,6 +138,28 @@ function App() {
       alert('Failed to delete player');
     }
   };
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image size should be less than 5MB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setFormData(prev => ({ ...prev, image: '' }));
+  };
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -223,6 +245,8 @@ function App() {
           onSubmit={handleFormSubmit}
           onClose={() => setShowFormModal(false)}
           darkMode={darkMode}
+          onImageUpload={handleImageUpload}
+          onRemoveImage={handleRemoveImage}
         />
       )}
     </div>

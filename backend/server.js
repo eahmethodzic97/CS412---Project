@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = 3001;
-const JWT_SECRET = 'your-secret-key-change-in-production';
+const JWT_SECRET = 'cs412_edis_ahmethodzic_2025';
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
